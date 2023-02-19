@@ -1,0 +1,169 @@
+<html>
+<head>
+	<meta name = "viewport" content="with= device-width, inital-scale=1.0">
+	<title> Better You - Contact Us page </title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,100&display=swap" rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<section class="subheader">
+
+	<nav>
+		<a href="index.html"><img src="images/logo2.png">
+		</a>
+			<div class="nav-links2">
+				<ul>
+					<li><a href="index.html">HOME</a></li>
+					<li><a href="signup.html">LOGIN</a></li>
+					<li><a href="signup.html">SIGN UP</a></li>
+					<li><a href="about.html">ABOUT</a></li>
+					<li><a href="contact.html">CONTACT US</a></li>
+				</ul>
+			</div>
+	</nav>
+
+	<h1> CONTACT US </h1>
+		
+</section>
+
+
+<!-----CONTACT US SECTION------>
+
+<section class = "location">
+	
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8390.182488315617!2d-6.272896381732596!3d53.39774599831378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670fb3a38c1393%3A0xb51166f947fdfbe9!2sHomes%20for%20Students%20Aspen!5e0!3m2!1sen!2sie!4v1675440890163!5m2!1sen!2sie" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</section>
+
+<section class = "contactus">
+	
+	<div class ="row">
+		<div class = "contact-col">
+			<div>
+				<i class="fa fa-home"></i>
+				<span>
+					<h5> Ballymun Rd, Dublin 11 </h5>
+					<p> Dublin, Ireland </p>
+				</span>
+			</div>
+			<div>
+				<i class="fa fa-phone"></i>
+				<span>
+					<h5> +1 123456789 </h5>
+					<p> Mon - Fri, 9AM to 5PM </p>
+				</span>
+			</div>
+			<div>
+				<i class="fa fa-envelope-o"></i>
+				<span>
+					<h5> info@betteryou.com </h5>
+					<p> Email Us </p>
+				</span>
+			</div>
+	    </div>
+
+		<div class = "contact-col">
+			
+			<form id = "contactform">
+				<input type="text" id ="name" placeholder="Enter your Name" required>
+				<input type="email" id ="email" placeholder="Enter Email" required>
+				<input type="text" id ="sub" placeholder="Enter your Subject" required>
+				<textarea rows = "8" id ="msg" placeholder="Message" required></textarea>
+
+				<button type="submit" class="btn"> Send Message</button>
+			</form>
+
+		</div>
+	</div>
+
+
+	<h2>USER INFO</h2>
+	<div id="output2">
+		<table id="userTable2" class ="table2" >
+			<thead>
+				<tr>
+					<th style ="padding: 10px;" >Name</th>
+					<th style ="padding: 10px;">Email</th>
+					<th style ="padding: 10px;">Subject</th>
+					<th style ="padding: 10px;">Message Body</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+
+	</div>
+
+	<script>
+
+		const f = document.querySelector('#contactform');
+		f.addEventListener('submit', function (event) {
+			event.preventDefault();
+			console.log("Button Pressed1");
+			displayData();
+			console.log("Button Pressed2");
+			f.reset();
+		});
+
+
+		function displayData(){
+
+			const name = document.querySelector('#name').value;
+			const email = document.querySelector('#email').value;
+			const sub = document.querySelector('#sub').value;
+			const msg = document.querySelector('#msg').value;
+
+			const formData = {
+				name:name,
+				email:email,
+				sub:sub,
+				msg:msg
+			}
+
+			console.log(formData);
+
+			if (!/\S+@\S+\.\S+/.test(email)) {
+    			alert("Email is not valid");
+    			return false;
+  			}
+
+			  if (sub.length < 8) {
+    			alert("Subject must be at least 8 characters long");
+    			return false;
+  			}
+
+			  const table = document.querySelector('#userTable2');
+			  const row = table.insertRow();
+
+			localStorage.setItem(name,name);
+			localStorage.setItem(email,email);
+			localStorage.setItem(sub,sub);
+			localStorage.setItem(msg,msg);
+
+			Object.values(formData).forEach((value, index) => {
+				const cell = row.insertCell(index);
+				cell.innerHTML = value;
+			});
+
+			return true;
+
+
+		}
+
+
+</script>
+
+
+</section>
+
+
+
+
+
+
+</body>
+</html>
