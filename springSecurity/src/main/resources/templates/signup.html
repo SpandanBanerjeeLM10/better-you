@@ -1,0 +1,206 @@
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="Css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" charset="utf-8"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+	
+<section class="regsubheader">
+
+
+	<nav>
+		<a href="index"><img src="Images/logo2.png">
+		</a>
+			
+	</nav>
+
+
+	<div class="container">
+		<h2>REGISTRATION FORM</h2>
+		<form id="myForm">
+			<!-- onsubmit="signUp(event);" -->
+			<div class="form-group">
+				<input type="text" name="fname" id="fname" placeholder="First Name" required>
+			</div>
+
+			<div class="form-group">
+				<input type="text" name="mname" id="mname" placeholder="Middle Name">
+			</div>
+
+			<div class="form-group">
+				<input type="text" name="lname" id="lname" placeholder="Last Name" required>
+			</div>
+
+			<div class="form-group">
+				<input type="text" name="add" id="add" placeholder="Address" required>
+			</div>
+
+			<div class="form-group">
+				<input type="text" name="uname" id="uname" placeholder="Username" required>
+			</div>
+
+			<div class="form-group">
+				<input type="email" name="email" id="email" placeholder="Email Address" required>
+			</div>
+
+			<div class="form-group">
+				<input type="password" name="pass" id="pass" placeholder="Password" required>
+			</div>
+
+			<div class="form-group">
+				<input type="password" name="cpass" id="cpass" placeholder="Confirm Password" required>
+			</div>
+
+			<div class="form-group">
+				<button type="submit">Submit</button>
+			</div>
+
+		</form>
+
+
+		<h2>USER INFO</h2>
+		<div id="output">
+			<table id="userTable" class="table1">
+				<thead>
+					<tr>
+						<th style ="padding: 10px;">First Name</th>
+						<th style ="padding: 10px;">Middle Name</th>
+						<th style ="padding: 10px;">Last Name</th>
+						<th style ="padding: 10px;">Address</th>
+						<th style ="padding: 10px;">Username</th>
+						<th style ="padding: 10px;">Email</th>
+						<th style ="padding: 10px;">Password</th>
+						<th style ="padding: 10px;">Confirm Password</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+
+		</div>
+
+
+
+	</div>
+
+
+<!-- JS for Storing and Displaying in table -->
+	<script>
+
+	//Capturing data on click
+		const form = document.querySelector('#myform');
+		form.addEventListener('submit', function (event) {
+			event.preventDefault();
+			displayFormData();
+			form.reset();
+		});
+
+
+
+		
+		function displayFormData() {
+			const first_name = document.querySelector('#fname').value;
+			const middle_name = document.querySelector('#mname').value;
+			const last_name = document.querySelector('#lname').value;
+			const address = document.querySelector('#add').value;
+			const username = document.querySelector('#uname').value;
+			const email = document.querySelector('#email').value;
+			const pass = document.querySelector('#pass').value;
+			const cpass = document.querySelector('#cpass').value;
+
+			const formData = {
+				first_name: first_name,
+				middle_name: middle_name,
+				last_name: last_name,
+				address: address,
+				username: username,
+				email: email,
+				pass: pass,
+				cpass: cpass
+			};
+
+
+			const data = { "firstName": first_name,"middleName": middle_name, "lastName": last_name, "address": address,"userName": username, "email": email, "password": pass,"confirmPassword": cpass};
+          console.log(data);
+          console.log("POST REQUEST (8080/users) SENT WITH USER DATA.");
+          $.ajax({
+                url : "http://localhost:8080/users",
+                type: "POST",
+                data : JSON.stringify(data),
+                contentType: "application/json",
+                crossDomain: true
+            });
+
+
+		
+//Validation Checks
+
+			if (!/\S+@\S+\.\S+/.test(email)) {
+    			alert("Email is not valid");
+    			return false;
+  			}
+
+			  if (pass.length < 8) {
+    			alert("Password must be at least 8 characters long");
+    			return false;
+  			}
+
+			  if (pass !== cpass) {
+    			alert("Passwords do not match");
+    			return false;
+  			}
+
+			
+			
+
+			const table = document.querySelector('#userTable');
+			const row = table.insertRow();
+
+//Locally storing it
+
+			localStorage.setItem(first_name,first_name);
+			localStorage.setItem(middle_name,middle_name);
+			localStorage.setItem(last_name,last_name);
+			localStorage.setItem(address,address);
+			localStorage.setItem(username,username);
+			localStorage.setItem(email,email);
+			localStorage.setItem(pass,pass);
+			localStorage.setItem(cpass,cpass);
+
+
+//Appending new row
+
+			Object.values(formData).forEach((value, index) => {
+				const cell = row.insertCell(index);
+				cell.innerHTML = value;
+			});
+
+			return true;
+
+		}
+
+
+	
+
+
+
+
+
+
+	</script>
+	</section>
+
+
+
+
+
+</body>
+
+</html>

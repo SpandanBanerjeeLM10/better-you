@@ -1,0 +1,122 @@
+<html>
+<head>
+	<meta name = "viewport" content="with= device-width, inital-scale=1.0">
+	<title> Better You - Home </title>
+	<link rel="stylesheet" href="Css/style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,100&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<section class="header">
+
+	<nav>
+		<a href="index"><img src="Images/logo.png">
+		</a>
+		<!--	<div class="nav-links">
+				<ul>
+					<li><a href="index.html">HOME</a></li>
+					<li><a href="signup.html">LOGIN</a></li>
+					<li><a href="signup.html">SIGN UP</a></li>
+					<li><a href="about.html">ABOUT</a></li>
+					<li><a href="contact.html">CONTACT US</a></li>
+				</ul>
+
+			</div> -->
+	</nav>
+ <!--SIDE BAR STYLE-->
+
+<div class="menu-btn">
+       <i class="fa-sharp fa-solid fa-bars"></i>
+   </div>          
+    
+   <div class="sidebar">
+       <div class="close-btn">
+       <i class="fa fa-times"></i>
+       </div>
+        
+   <div class="menu">
+      
+    <div class="item">
+        <a class = "sub-btn"> Our Services <i class="fa fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+            <a href="mindfulness" class="sub-item"> Mindfulness </a>
+            <a href="physical" class="sub-item"> Physical Health </a>
+            <a href="plan" class="sub-item"> Planner </a>
+        </div>
+       </div> 
+    <div class="item"><a href="demo"> Login</a></div> 
+    <div class="item"><a href="signup"> Sign Up</a></div> 
+    <div class="item"><a href="about"> About</a></div> 
+    <div class="item"><a href="contact">Contact Us</a></div>
+       
+   </div>     
+   </div>
+   
+   <!-- JS for SIDE BAR ANIMATIONS-->     
+   <script type="text/javascript">
+       $(document).ready(function(){
+           
+           $('.sub-btn').click(function(){
+               $(this).next('.sub-menu').slideToggle();
+               $(this).find('.dropdown').toggleClass('rotate');
+           });
+           
+            $('.menu-btn').click(function(){
+                $('.sidebar').addClass('active');
+            });
+           
+           $('.close-btn').click(function(){
+                $('.sidebar').removeClass('active');
+            });
+       });
+    </script>
+
+ 
+
+	<div class="text-box">
+		<h1> Better You for a Better Tomorrow </h1>
+		<p>	Man conquers the world by conquering himself.</p>
+
+	</div>
+		
+</section>
+
+<section class ="body">
+	<h1>Three Areas Of Focus</h1>
+	<p> From meditation to daily excercise, plan your today for a better tomorrow.</p>
+
+	<div class="row">
+		<div class="focus-col">
+			<a href="mindfulness"><h3>MINDFULNESS</h3></a>
+			<p>Mindfulness is the practice of being present in the moment and paying attention to one's thoughts, feelings, and surroundings. It has been shown to have numerous benefits, including reduced stress and anxiety, improved emotional regulation, increased focus and attention, enhanced well-being and happiness, improved physical health, and more.</p>
+		</div>
+
+		<div class="focus-col">
+			<a href="physical"><h3>PHYSICAL HEALTH</h3></a>
+			<p>Physical health refers to a person's overall well-being and fitness. It involves taking care of one's body through regular exercise, a balanced diet, and other healthy habits such as getting enough sleep and managing stress. Good physical health can lead to reduced risk of chronic diseases, improved fitness, increased strength and flexibility </p>
+		</div>
+
+		<div class="focus-col">
+			<a href="plan"><h3>PLANNING YOUR DAY</h3></a>
+			<p>Planning your day is a useful way to prioritize tasks, increase productivity, and reduce stress. It involves creating a schedule for the day ahead and setting specific, achievable goals. This can include tasks for work or personal life, such as exercising, completing errands.Planning your day ahead of time can help ensure that you stay on track and accomplish what you need to do, leading to a more organized and fulfilling day. </p>
+		</div>
+	</div>
+
+</section>
+
+<!--footer-->
+
+<section class = "footer">
+	<h4> About </h4>
+	<p> Better You is an online platform that provides resources, tools, and information to support individuals in <br> improving various aspects of their lives, such as mental health, physical health, personal development, and more.</p>
+
+	<p1> Made by Spandan Banerjee </p1>
+	
+</section>
+
+</body>
+</html>

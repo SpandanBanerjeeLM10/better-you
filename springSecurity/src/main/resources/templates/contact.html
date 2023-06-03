@@ -1,0 +1,294 @@
+<html>
+<head>
+	<meta name = "viewport" content="with= device-width, inital-scale=1.0">
+	<title> Better You - Contact Us page </title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="Css/style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,100&display=swap" rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- include jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- include jQuery UI library -->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+</head>
+<body>
+
+	
+
+<section class="subheader">
+
+	<nav>
+		<a href="index"><img src="Images/logo2.png">
+		</a>
+			<div class="nav-links2">
+				<ul>
+					<li><a href="index.">HOME</a></li>
+					<li><a href="demo">LOGIN</a></li>
+					<li><a href="signup">SIGN UP</a></li>
+					<li><a href="about">ABOUT</a></li>
+					<li><a href="contact">CONTACT US</a></li>
+				</ul>
+			</div>
+	</nav>
+
+	<h1> CONTACT US </h1>
+		
+</section>
+
+
+<!-----CONTACT US SECTION------>
+
+<section class = "location">
+	
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8390.182488315617!2d-6.272896381732596!3d53.39774599831378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670fb3a38c1393%3A0xb51166f947fdfbe9!2sHomes%20for%20Students%20Aspen!5e0!3m2!1sen!2sie!4v1675440890163!5m2!1sen!2sie" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</section>
+
+<section class = "contactus">
+	
+	<div class ="row">
+		<div class = "contact-col">
+			<div>
+				<i class="fa fa-home"></i>
+				<span>
+					<h5> Ballymun Rd, Dublin 11 </h5>
+					<p> Dublin, Ireland </p>
+				</span>
+			</div>
+			<div>
+				<i class="fa fa-phone"></i>
+				<span>
+					<h5> +1 123456789 </h5>
+					<p> Mon - Fri, 9AM to 5PM </p>
+				</span>
+			</div>
+			<div>
+				<i class="fa fa-envelope-o"></i>
+				<span>
+					<h5> info@betteryou.com </h5>
+					<p> Email Us </p>
+				</span>
+			</div>
+	    </div>
+
+		<div class = "contact-col">
+			
+			<form id = "contactform">
+				<input type="text" id ="name" placeholder="Enter your Name" required>
+				<input type="text" id ="uname" placeholder="Enter your Username" required>
+				<input type="email" id ="email" placeholder="Enter Email" required>
+				<input type="text" id ="sub" placeholder="Enter your Subject" required>
+				<textarea rows = "8" id ="msg" placeholder="Message" required></textarea>
+
+				<button type="submit" class="btn"> Send Message</button>
+			</form>
+
+		</div>
+	</div>
+
+	
+
+	<script>
+
+		const f = document.querySelector('#contactform');
+		f.addEventListener('submit', function (event) {
+			event.preventDefault();
+			console.log("Submit Button Pressed");
+			displayData();
+			
+			f.reset();
+		});
+	
+		function displayData(){
+			const name = document.getElementById('name').value;
+			const uname = document.getElementById('uname').value;
+			const email = document.getElementById('email').value;
+			const sub = document.getElementById('sub').value;
+			const msg = document.getElementById('msg').value;
+	
+			if (sub.length < 8) {
+				alert("Subject must be at least 8 characters long");
+				return false;
+			}
+	
+			const data = { "name": name, "userName": uname, "email": email, "subject": sub, "message": msg };
+			console.log(data);
+			$.ajax({
+				url : "http://localhost:8080/contact",
+				type: "POST",
+				data : JSON.stringify(data),
+				contentType: "application/json",
+				crossDomain: true
+			});
+			
+			console.log("POST REQUEST (8080/contact) SENT WITH USER DATA.");
+		}
+		
+
+
+		const container = document.createElement('div');
+		container.style.display = 'flex';
+		container.style.flexDirection = 'column';
+		container.style.alignItems = 'center';
+		container.style.justifyContent = 'center';
+		document.body.appendChild(container);
+
+		const title = document.createElement('h2');
+		title.innerText = "User Information - Contact Us";
+		title.style.marginBottom = '20px'; // Add some gap below the title
+		container.appendChild(title);
+
+		const button = document.createElement('button');
+		button.classList.add('new-btn');
+		button.innerText = 'Fetch Table';
+		button.addEventListener('click', fetchUserData);
+		button.style.marginTop = '20px'; // Add some gap above the button
+		button.style.marginBottom = '40px'; // Add some gap below the button
+		container.appendChild(button);
+
+
+
+	function fetchUserData() {
+			fetch('http://localhost:8081/contact')
+			.then(response => {
+				return response.json()
+			})
+			.then(userData=>{
+				
+				console.log("GET REQUEST (8081/contact) FOR USER DATA.");
+				console.log(userData);
+				const table = document.createElement('table');
+				table.classList.add('my-table');
+				const headers = ['Name', 'Username', 'Email', 'Subject', 'Message'];
+
+				// Create table headers
+				const headerRow = document.createElement('tr');
+				headers.forEach(headerText => {
+				const header = document.createElement('th');
+				header.innerText = headerText;
+				headerRow.appendChild(header);
+				});
+				table.appendChild(headerRow);
+
+				
+				// Create table rows
+				userData.forEach(user => {
+				const row = document.createElement('tr');
+				const cellName = document.createElement('td');
+				console.log(user.name);
+				cellName.innerText = user.name;
+				row.appendChild(cellName);
+
+				const cellUname = document.createElement('td');
+				//cellUname.innerText = user.username;
+				const link = document.createElement('a');
+				link.setAttribute('href', '#');
+				link.setAttribute('class', 'username-link');
+				console.log(user.userName);
+				link.setAttribute('data-username', user.userName);
+				link.innerText = user.userName;
+				cellUname.appendChild(link);
+				row.appendChild(cellUname);
+
+				const cellEmail = document.createElement('td');
+				cellEmail.innerText = user.email;
+				row.appendChild(cellEmail);
+
+				const cellSub = document.createElement('td');
+				cellSub.innerText = user.subject;
+				row.appendChild(cellSub);
+
+				const cellMsg = document.createElement('td');
+				cellMsg.innerText = user.message;
+				row.appendChild(cellMsg);
+
+				table.appendChild(row);
+				});
+
+				// Add table to the DOM
+				document.body.appendChild(table);
+			} )
+			.catch(error=> console.log(error));
+
+
+			  const table = document.querySelector('#userTable2');
+			 // const row = table.insertRow();
+
+
+			$(document).on("click", ".username-link", function() {
+        	  var userName = $(this).data("username");
+
+        	  $.ajax({
+        		    url: "http://localhost:8081/users/" + userName,
+        		    type: "GET",
+        		    dataType: "json",
+        		    success: function(result) {
+        		    	console.log("GET REQUEST (8081/users/"+userName+") FOR USER DATA.");
+        		       	console.log(result);
+
+						
+        		        // Create a table to display the feedback data
+        		        var table = $("<table></table>").addClass("my-table2");;
+        		        var headerRow = $("<tr></tr>");
+        		        headerRow.append("<th>First Name</th>");
+						headerRow.append("<th>Middle Name</th>");
+        		        headerRow.append("<th>Last Name</th>");
+						headerRow.append("<th>Address</th>");
+						headerRow.append("<th>Username</th>");
+        		        headerRow.append("<th>Email</th>");
+						headerRow.append("<th>Password</th>");
+        		        table.append(headerRow);
+
+        		        var userData = result;
+						
+						var dataRow = $("<tr></tr>");
+						dataRow.append("<td>" + userData.firstName + "</td>");
+						dataRow.append("<td>" + userData.middleName + "</td>");
+						dataRow.append("<td>" + userData.lastName + "</td>");
+						dataRow.append("<td>"+ userData.address + "</td>");
+						dataRow.append("<td>" + userData.userName + "</td>");
+						dataRow.append("<td>" + userData.email + "</td>");
+						dataRow.append("<td>" + userData.password + "</td>");
+						//dataRow.append("<td>" + userData.ConfirmPassword + "</td>");
+						table.append(dataRow);
+
+        		        // Display the table in a modal dialog box
+						var modal = $("<div></div>").append(table);
+						modal.dialog({
+							title: "User Data for " + userData.firstName + " " + userData.lastName,
+							modal: true,
+							width: 800
+						});
+					},
+					error: function(xhr, status, error) {
+						console.error(error); // log the error message to the console
+					}
+        	  });
+          
+          });
+			
+
+			
+
+
+			return true;
+
+
+		}
+
+
+</script>
+
+
+</section>
+
+
+
+
+
+
+</body>
+</html>
